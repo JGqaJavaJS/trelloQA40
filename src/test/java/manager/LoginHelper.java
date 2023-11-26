@@ -1,6 +1,7 @@
 package manager;
 
 import dto.UserDTO;
+import dto.UserDTOLombok;
 import dto.UserDTOWith;
 import org.openqa.selenium.By;
 
@@ -21,24 +22,61 @@ public class LoginHelper extends BaseHelper{
     By btnSubmitEmailPassword = By.xpath("//button[@id='login-submit']");
     By inputPassword = By.xpath("//input[@id='password']");
     By textBoards = By.xpath("//span[text()='Boards']");
+    By textH5SignUp = By.xpath("//h5");
 
-    public void loginUserDto(UserDTO user) {
+    public void login(UserDTOLombok user) {
+          //  clickBase(btnLoginMainPage);
+        clickBtnLoginMainPage();
+        //    sendKeysBase(inputEmail, user.getEmail());
+        printEmailForLogin(user.getEmail());
+        //    clickBase(btnSubmitEmailPassword);
+        clickBtnSubmitEmailForLogin();
+        //    sendKeysBase(inputPassword, user.getPassword());
+        printPasswordForLogin(user.getPassword());
+        //    clickBase(btnSubmitEmailPassword);
+        clickBtnSubmitEmailPassword();
+    }
+
+    public void clickBtnLoginMainPage() {
         clickBase(btnLoginMainPage);
-        sendKeysBase(inputEmail, user.getEmail());
+    }
+
+    public void printEmailForLogin(String email) {
+        sendKeysBase(inputEmail, email);
+    }
+
+    public void clickBtnSubmitEmailForLogin() {
         clickBase(btnSubmitEmailPassword);
-        sendKeysBase(inputPassword, user.getPassword());
+    }
+
+    public void printPasswordForLogin(String password) {
+        sendKeysBase(inputPassword, password);
+    }
+
+    public void clickBtnSubmitEmailPassword() {
         clickBase(btnSubmitEmailPassword);
     }
 
     public boolean validateTextBoardsExist() {
         return isTextActualEqualToExpected(textBoards, "Boards");
     }
-
-    public void loginUserDtoWith(UserDTOWith user) {
-        clickBase(btnLoginMainPage);
-        sendKeysBase(inputEmail, user.getEmail());
-        clickBase(btnSubmitEmailPassword);
-        sendKeysBase(inputPassword, user.getPassword());
-        clickBase(btnSubmitEmailPassword);
+    public boolean validateTextSignUpH5Displays(){
+        return isTextActualEqualToExpected(textH5SignUp, "Sign up to continue");
     }
+
+//    public void loginUserDtoWith(UserDTOWith user) {
+//        clickBase(btnLoginMainPage);
+//        sendKeysBase(inputEmail, user.getEmail());
+//        clickBase(btnSubmitEmailPassword);
+//        sendKeysBase(inputPassword, user.getPassword());
+//        clickBase(btnSubmitEmailPassword);
+//    }
+
+    //    public void loginUserDto(UserDTO user) {
+//        clickBase(btnLoginMainPage);
+//        sendKeysBase(inputEmail, user.getEmail());
+//        clickBase(btnSubmitEmailPassword);
+//        sendKeysBase(inputPassword, user.getPassword());
+//        clickBase(btnSubmitEmailPassword);
+//    }
 }
