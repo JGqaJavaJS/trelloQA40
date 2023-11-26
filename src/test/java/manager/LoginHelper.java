@@ -1,6 +1,7 @@
 package manager;
 
 import dto.UserDTO;
+import dto.UserDTOWith;
 import org.openqa.selenium.By;
 
 public class LoginHelper extends BaseHelper{
@@ -33,4 +34,11 @@ public class LoginHelper extends BaseHelper{
         return isTextActualEqualToExpected(textBoards, "Boards");
     }
 
+    public void loginUserDtoWith(UserDTOWith user) {
+        clickBase(btnLoginMainPage);
+        sendKeysBase(inputEmail, user.getEmail());
+        clickBase(btnSubmitEmailPassword);
+        sendKeysBase(inputPassword, user.getPassword());
+        clickBase(btnSubmitEmailPassword);
+    }
 }
