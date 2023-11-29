@@ -2,14 +2,19 @@ package manager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BaseHelper {
+
+    Logger logger = LoggerFactory.getLogger(BaseHelper.class);
 
     public WebElement findElementBase(By by) {
         return ApplicationManager.getDriver().findElement(by);
     }
 
     public void clickBase(By by) {
+        logger.info("By: " + by + " method click");
         findElementBase(by).click();
     }
 

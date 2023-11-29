@@ -4,13 +4,20 @@ import dto.UserDTOLombok;
 import manager.ApplicationManager;
 import manager.LoginHelper;
 import manager.LogoutHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+
+import java.lang.reflect.Method;
 
 public class BaseTest {
 
     LoginHelper loginHelper = new LoginHelper();
     LogoutHelper logoutHelper = new LogoutHelper();
+    Logger logger = LoggerFactory.getLogger(BaseTest.class);
 
     UserDTOLombok user = UserDTOLombok.builder()
             .email("juliagordyin@gmail.com")
@@ -22,11 +29,23 @@ public class BaseTest {
 
     @BeforeSuite(alwaysRun = true)
     public void preconditions() {
+        logger.info("open browser and navigate to main page");
         ApplicationManager.init();
     }
 
     @AfterSuite(alwaysRun = true)
     public void postConditions() {
+        logger.info("close browser");
         ApplicationManager.tearDown();
+    }
+
+    @BeforeMethod(alwaysRun = true)
+    public void beforeEachMethod(Method method) {
+        logger.info("started method: " + method.getName());
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void afterEachMethod(Method method) {
+        logger.info("stopped method: " + method.getName());
     }
 }

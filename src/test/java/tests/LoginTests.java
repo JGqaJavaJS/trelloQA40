@@ -5,16 +5,21 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Method;
+
 public class LoginTests extends BaseTest{
 
-    @AfterMethod
-    public void postCondAfterMethod() {
+    @AfterMethod(alwaysRun = true)
+    public void postCondAfterMethod(Method method) {
         if(flagNeedLogout) {
             logoutHelper.logout();
             flagNeedLogout = false;
+            logger.info("flagNeedLogout = " + flagNeedLogout);
+            logger.info("method info: " + method.getName());
         } else if (flagNeedOpenMainPage) {
             ApplicationManager.navigateToMainPage();
             flagNeedOpenMainPage = false;
+            logger.info("flagNeedOpenMainPage = " + flagNeedOpenMainPage);
         }
         // if login todo logout
         //if error sign up - just go to main page
@@ -24,6 +29,7 @@ public class LoginTests extends BaseTest{
     public void positiveLoginTest() {
         loginHelper.login(user);
         flagNeedLogout = true;
+        logger.info("flagNeedLogout = " + flagNeedLogout);
         Assert.assertTrue(loginHelper.validateTextBoardsExist());
     }
 
@@ -33,6 +39,7 @@ public class LoginTests extends BaseTest{
         loginHelper.printEmailForLogin("juliagordin@gmail.com");
         loginHelper.clickBtnSubmitEmailForLogin();
         flagNeedOpenMainPage = true;
+        logger.info("flagNeedOpenMainPage = " + flagNeedOpenMainPage);
         Assert.assertTrue(loginHelper.validateTextSignUpH5Displays());
     }
 
