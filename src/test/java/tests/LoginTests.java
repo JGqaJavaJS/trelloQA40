@@ -1,7 +1,6 @@
 package tests;
 
-import dto.UserDTO;
-import dto.UserDTOWith;
+import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
@@ -10,6 +9,13 @@ public class LoginTests extends BaseTest{
 
     @AfterMethod
     public void postCondAfterMethod() {
+        if(flagNeedLogout) {
+            logoutHelper.logout();
+            flagNeedLogout = false;
+        } else if (flagNeedOpenMainPage) {
+            ApplicationManager.navigateToMainPage();
+            flagNeedOpenMainPage = false;
+        }
         // if login todo logout
         //if error sign up - just go to main page
     }
@@ -17,14 +23,16 @@ public class LoginTests extends BaseTest{
     @Test
     public void positiveLoginTest() {
         loginHelper.login(user);
+        flagNeedLogout = true;
         Assert.assertTrue(loginHelper.validateTextBoardsExist());
     }
 
     @Test
-    public void negativeEmailValidTest() {
+    public void negativeEmailValidNotExistTest() {
         loginHelper.clickBtnLoginMainPage();
         loginHelper.printEmailForLogin("juliagordin@gmail.com");
         loginHelper.clickBtnSubmitEmailForLogin();
+        flagNeedOpenMainPage = true;
         Assert.assertTrue(loginHelper.validateTextSignUpH5Displays());
     }
 
