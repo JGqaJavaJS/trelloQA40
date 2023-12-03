@@ -15,6 +15,7 @@ public class ApplicationManager {
         navigateToMainPage();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        driver.register(new WDListener());
     }
 
     public static void tearDown() {
