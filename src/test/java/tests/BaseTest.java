@@ -1,10 +1,7 @@
 package tests;
 
 import dto.UserDTOLombok;
-import manager.ApplicationManager;
-import manager.LoginHelper;
-import manager.LogoutHelper;
-import manager.TestNGListener;
+import manager.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
@@ -16,6 +13,7 @@ public class BaseTest {
 
     LoginHelper loginHelper = new LoginHelper();
     LogoutHelper logoutHelper = new LogoutHelper();
+    BoardsHelper boardsHelper = new BoardsHelper();
     Logger logger = LoggerFactory.getLogger(BaseTest.class);
 
     UserDTOLombok user = UserDTOLombok.builder()
