@@ -1,12 +1,15 @@
 package manager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utils.DatesUtils;
+
+import java.io.File;
+import java.io.IOException;
+
+import com.google.common.io.Files;
 
 public class WDListener extends AbstractWebDriverEventListener {
 
@@ -138,6 +141,21 @@ public class WDListener extends AbstractWebDriverEventListener {
     @Override
     public void onException(Throwable throwable, WebDriver driver) {
         super.onException(throwable, driver);
+        logger.info("we got an exception: " + throwable.toString());
+        logger.error("with the message: " + throwable.getMessage());
+        String name = "src/test/screenshots/screenshot-" + DatesUtils.getDateString() + ".png";
+        takeScreenshot((TakesScreenshot)driver, name);
+        logger.info("created screenshot: " + name);
+    }
+
+    private void takeScreenshot(TakesScreenshot takeScreenshot, String name) {
+        try {
+            File tmp = takeScreenshot.getScreenshotAs(OutputType.FILE);
+            File screenshot = new File(name);
+            Files.copy(tmp, screenshot);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
