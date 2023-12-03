@@ -2,15 +2,16 @@ package manager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
 
-    static WebDriver driver;
+    static EventFiringWebDriver driver;
 
     public static void init() {
-        driver = new ChromeDriver();
+        driver = new EventFiringWebDriver(new ChromeDriver());
         navigateToMainPage();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);

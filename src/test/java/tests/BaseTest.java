@@ -4,15 +4,14 @@ import dto.UserDTOLombok;
 import manager.ApplicationManager;
 import manager.LoginHelper;
 import manager.LogoutHelper;
+import manager.TestNGListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
+@Listeners(TestNGListener.class)
 public class BaseTest {
 
     LoginHelper loginHelper = new LoginHelper();
