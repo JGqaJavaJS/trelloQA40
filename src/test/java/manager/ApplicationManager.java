@@ -12,28 +12,31 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
 
+    static Logger logger = LoggerFactory.getLogger(ApplicationManager.class);
+
     static EventFiringWebDriver driver;
-//    static  String browser;
-//
-//    public ApplicationManager() {
-//        browser = System.getProperty("browser", BrowserType.CHROME);
-//    }
+    static String browser;
+
+    public ApplicationManager() {
+        browser = System.getProperty("browser", BrowserType.CHROME);
+    }
 
 //    public ApplicationManager(String browser) { this.browser = browser;
 //    }
 
-    static Logger logger = LoggerFactory.getLogger(ApplicationManager.class);
-
     public static void init() {
-//        if(browser.equals(BrowserType.CHROME)) {
-//            driver = new EventFiringWebDriver(new ChromeDriver());
-//            // driver = new EventFiringWebDriver(WebDriverManager.chromedriver().create());
-//            logger.info("Test started on Chrome");
-//        } else if(browser.equals(BrowserType.FIREFOX)){
-//            driver = new EventFiringWebDriver(new FirefoxDriver());
-//            logger.info("started firefox browser");
-//        }
-        driver = new EventFiringWebDriver(new ChromeDriver());
+        ApplicationManager app = new ApplicationManager();
+        System.out.println("browser: " + browser);
+        if(browser.equals(BrowserType.CHROME)) {
+         //   if(true) {
+            driver = new EventFiringWebDriver(new ChromeDriver());
+            // driver = new EventFiringWebDriver(WebDriverManager.chromedriver().create());
+            logger.info("Test started on Chrome");
+        } else if(browser.equals(BrowserType.FIREFOX)){
+            driver = new EventFiringWebDriver(new FirefoxDriver());
+            logger.info("started firefox browser");
+        }
+     //   driver = new EventFiringWebDriver(new ChromeDriver());
         navigateToMainPage();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
