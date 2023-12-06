@@ -25,7 +25,7 @@ public class LoginTests extends BaseTest{
         //if error sign up - just go to main page
     }
 
-    @Test
+    @Test(groups = {"smoke"})
     public void positiveLoginTest() {
         loginHelper.login(user);
         flagNeedLogout = true;

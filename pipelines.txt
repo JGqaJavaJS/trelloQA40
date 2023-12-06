@@ -1,3 +1,5 @@
 ./gradlew test
 ./gradlew clean logintests
+./gradlew clean -Dgroups=smoke groupstests
+./gradlew clean groupstests
 ./gradlew clean -Pbrowser=firefox logintests
