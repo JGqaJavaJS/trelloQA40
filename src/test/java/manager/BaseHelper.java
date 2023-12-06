@@ -33,6 +33,28 @@ public class BaseHelper {
             System.out.println("actual result: " +
                     findElementBase(by).getText().toUpperCase().trim() +
                     " expected result: " + text.toUpperCase().trim());
+            logger.info("actual result: " +
+                    findElementBase(by).getText().toUpperCase().trim() +
+                    " expected result: " + text.toUpperCase().trim());
+            return false;
+        }
+    }
+
+    public boolean isTextActualEqualToExpected2Strings(By by, String text, String text2) {
+        if(findElementBase(by).getText().toUpperCase().trim()
+                .equals(text.toUpperCase().trim())
+        || findElementBase(by).getText().toUpperCase().trim()
+                .equals(text2.toUpperCase().trim())) {
+            return true;
+        } else {
+            System.out.println("actual result: " +
+                    findElementBase(by).getText().toUpperCase().trim() +
+                    " expected result: " + text.toUpperCase().trim() + " or "
+            + text.toUpperCase().trim());
+            logger.info("actual result: " +
+                    findElementBase(by).getText().toUpperCase().trim() +
+                    " expected result: " + text.toUpperCase().trim() + " or "
+                    + text.toUpperCase().trim());
             return false;
         }
     }
