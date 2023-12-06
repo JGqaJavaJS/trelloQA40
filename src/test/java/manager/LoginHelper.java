@@ -61,7 +61,7 @@ public class LoginHelper extends BaseHelper{
         return isTextActualEqualToExpected(textBoards, "Boards");
     }
     public boolean validateTextSignUpH5Displays(){
-        return isTextActualEqualToExpected(textH5SignUp, "Sign up to continue");
+        return isTextActualEqualToExpected2Strings(textH5SignUp, "Sign up to continue", "LOG IN TO CONTINUE");
     }
 
 //    public void loginUserDtoWith(UserDTOWith user) {

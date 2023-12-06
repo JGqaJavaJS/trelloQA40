@@ -5,12 +5,12 @@ import org.testng.annotations.BeforeClass;
 
 public class DeleteBoardTests extends BaseTest{
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         loginHelper.login(user);
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void afterClass() {
         logoutHelper.logout();
     }
