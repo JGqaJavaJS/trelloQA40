@@ -5,3 +5,5 @@
 ./gradlew clean groupstests
 ./gradlew clean -Pbrowser=firefox logintests
 ./gradlew clean -Pbrowser=chrome logintests
+./gradlew clean -Dsuite=boardst boards
+./gradlew clean -Ptarget=fake boards

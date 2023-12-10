@@ -7,6 +7,7 @@ import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utils.ConfigProperties;
 
 import java.util.concurrent.TimeUnit;
 
@@ -52,7 +53,8 @@ public class ApplicationManager {
     }
 
     public static void navigateToMainPage() {
-        driver.navigate().to("https://trello.com/home");
+       // driver.navigate().to("https://trello.com/home");
+        driver.navigate().to(ConfigProperties.getProperty("url"));
     }
 
 }
