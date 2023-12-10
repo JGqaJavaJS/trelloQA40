@@ -5,6 +5,7 @@ import manager.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
+import utils.RandomUtils;
 
 import java.lang.reflect.Method;
 
@@ -15,6 +16,7 @@ public class BaseTest {
     LogoutHelper logoutHelper = new LogoutHelper();
     BoardsHelper boardsHelper = new BoardsHelper();
     Logger logger = LoggerFactory.getLogger(BaseTest.class);
+    RandomUtils randomUtils = new RandomUtils();
 
     UserDTOLombok user = UserDTOLombok.builder()
             .email("juliagordyin@gmail.com")

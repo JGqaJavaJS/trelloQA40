@@ -58,4 +58,16 @@ public class BaseHelper {
             return false;
         }
     }
+
+    public void pause(long i) {
+        try {
+            Thread.sleep(i);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void navigateBack() {
+        ApplicationManager.getDriver().navigate().back();
+    }
 }
