@@ -5,12 +5,17 @@ import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 public class BaseHelper {
 
     Logger logger = LoggerFactory.getLogger(BaseHelper.class);
 
     public WebElement findElementBase(By by) {
         return ApplicationManager.getDriver().findElement(by);
+    }
+    public List<WebElement> findElementsBase(By by) {
+        return ApplicationManager.getDriver().findElements(by);
     }
 
     public void clickBase(By by) {
@@ -23,6 +28,10 @@ public class BaseHelper {
         el.click();
         el.clear();
         el.sendKeys(text);
+    }
+
+    public String getTextBase(WebElement element) {
+        return element.getText().toUpperCase().trim();
     }
 
     public boolean isTextActualEqualToExpected(By by, String text) {
