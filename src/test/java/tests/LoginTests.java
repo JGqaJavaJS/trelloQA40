@@ -1,5 +1,7 @@
 package tests;
 
+import data.DataProviderLogin;
+import dto.UserDTOLombok;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -25,9 +27,17 @@ public class LoginTests extends BaseTest{
         //if error sign up - just go to main page
     }
 
-    @Test(groups = {"smoke"})
-    public void positiveLoginTest() {
-        loginHelper.login(user);
+    @Test(groups = {"smoke"}, dataProvider = "usersPositiveData", dataProviderClass = DataProviderLogin.class)
+    public void positiveLoginTest(UserDTOLombok userD) {
+        loginHelper.login(userD);
+        flagNeedLogout = true;
+        logger.info("flagNeedLogout = " + flagNeedLogout);
+        Assert.assertTrue(loginHelper.validateTextBoardsExist());
+    }
+
+    @Test(groups = {"smoke"}, dataProvider = "loginCSV", dataProviderClass = DataProviderLogin.class)
+    public void positiveLoginTest2(UserDTOLombok userD) {
+        loginHelper.login(userD);
         flagNeedLogout = true;
         logger.info("flagNeedLogout = " + flagNeedLogout);
         Assert.assertTrue(loginHelper.validateTextBoardsExist());
@@ -37,6 +47,16 @@ public class LoginTests extends BaseTest{
     public void negativeEmailValidNotExistTest() {
         loginHelper.clickBtnLoginMainPage();
         loginHelper.printEmailForLogin("juliagordin@gmail.com");
+        loginHelper.clickBtnSubmitEmailForLogin();
+        flagNeedOpenMainPage = true;
+        logger.info("flagNeedOpenMainPage = " + flagNeedOpenMainPage);
+        Assert.assertTrue(loginHelper.validateTextSignUpH5Displays());
+    }
+
+    @Test(dataProvider = "usersNegativeEmailData", dataProviderClass = DataProviderLogin.class)
+    public void negativeEmailValidNotExistTest2(UserDTOLombok userB) {
+        loginHelper.clickBtnLoginMainPage();
+        loginHelper.printEmailForLogin(userB.getEmail());
         loginHelper.clickBtnSubmitEmailForLogin();
         flagNeedOpenMainPage = true;
         logger.info("flagNeedOpenMainPage = " + flagNeedOpenMainPage);

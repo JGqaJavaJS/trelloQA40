@@ -19,7 +19,7 @@ public class ApplicationManager {
     static String browser;
 
     public ApplicationManager() {
-        browser = System.getProperty("browser", BrowserType.CHROME);
+        browser = System.getProperty("browser", BrowserType.FIREFOX);
     }
 
 //    public ApplicationManager(String browser) { this.browser = browser;
